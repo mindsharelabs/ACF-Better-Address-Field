@@ -341,9 +341,10 @@ class acf_field_address_map extends acf_field {
 
 		$dir = plugin_dir_url( __FILE__ );
 
-
+		wp_register_script( 'google_js', 'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBOhWa2Ar-qZhoH9lpOg9MhlDpwCk46M2Q', '', true);
+		wp_enqueue_script('google_js');
 		// register & include JS
-		wp_register_script( 'acf-input-address_map', "{$dir}js/input.v5.js" );
+		wp_register_script( 'acf-input-address_map', "{$dir}js/input.v5.js", array('google_js') );
 		wp_enqueue_script('acf-input-address_map');
 
 
@@ -388,11 +389,11 @@ class acf_field_address_map extends acf_field {
 
 		$output['formatted_address'] = '<div itemscope itemtype="http://schema.org/PostalAddress">
 										 <span itemprop="name">'.$value['name'].'</span>
-										 <span itemprop="streetAddress">'.$value['address']['line_1'].$line2.'</span>
+										 <span itemprop="streetAddress">'.$value['address']['line_1'].$line2.'</span><br/>
 										 <span itemprop="addressLocality">'.$value['address']['city'].'</span>,
 										 <span itemprop="addressRegion">'.$value['address']['state'].'</span>
 										 <span itemprop="postalCode">'.$value['address']['zip'].'</span>
-										 <span itemprop="addressCountry">'.$value['address']['country'].'</span>
+										 <span hidden itemprop="addressCountry">'.$value['address']['country'].'</span>
 										</div>';
 
 		$output['address'] = $value['address'];
