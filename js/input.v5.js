@@ -120,7 +120,6 @@
 				// reference
 				var $el = this.map.$el;
 				var place = autocomplete.getPlace();
-				console.log(place);
 
 				var addressObject = {
 					data: {

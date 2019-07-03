@@ -382,18 +382,19 @@ class acf_field_address_map extends acf_field {
 			return $value;
 
 		}
+		$item_container = apply_filters( 'mind_acf_formated_value', 'span');
 
 		$output['name'] = $value['name'];
 
-		$line2 = ($value['address']['line_2']) ? ', ' . $value['address']['line_2'] : '';
+		$line2 = ($value['address']['line_2']) ? '<br>' . $value['address']['line_2'] : '';
 
-		$output['formatted_address'] = '<div itemscope itemtype="http://schema.org/PostalAddress">
-										 <span itemprop="name">'.$value['name'].'</span>
-										 <span itemprop="streetAddress">'.$value['address']['line_1'].$line2.'</span><br/>
-										 <span itemprop="addressLocality">'.$value['address']['city'].'</span>,
-										 <span itemprop="addressRegion">'.$value['address']['state'].'</span>
-										 <span itemprop="postalCode">'.$value['address']['zip'].'</span>
-										 <span hidden itemprop="addressCountry">'.$value['address']['country'].'</span>
+		$output['formatted_address'] = '<div class="formatted_address" itemscope itemtype="http://schema.org/PostalAddress">
+										 <' . $item_container . ' class="name" itemprop="name">'.$value['name'].'</' . $item_container . '>
+										 <' . $item_container . ' class="streetAddress" itemprop="streetAddress">' . $value['address']['line_1'] . $line2 . '</' . $item_container . '>
+										 <' . $item_container . ' class="addressLocality" itemprop="addressLocality">'.$value['address']['city'].'</' . $item_container . '>,
+										 <' . $item_container . ' class="addressRegion" itemprop="addressRegion">'.$value['address']['state'].'</' . $item_container . '>
+										 <' . $item_container . ' class="postalCode" itemprop="postalCode">'.$value['address']['zip'].'</' . $item_container . '>
+										 <' . $item_container . ' class="addressCountry" itemprop="addressCountry">'.$value['address']['country'].'</' . $item_container . '>
 										</div>';
 
 		$output['address'] = $value['address'];
@@ -405,7 +406,7 @@ class acf_field_address_map extends acf_field {
 							'lng' => $value['lng']
 							);
 
-
+		$output = apply_filters( 'mind_acf_formated_value', $output);
 		return $output;
 	}
 
