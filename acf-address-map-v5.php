@@ -285,7 +285,7 @@ class acf_field_address_map extends acf_field {
 					<td><input class="google-map" name="<?php echo esc_attr($field['name']); ?>[info][google_map]" type="text" value="<?php echo $this->cond_display_value($field, array('info', 'google_map'));  ?>"></td>
 				</tr>
 
-				<?php submit_button('Update', 'primary', 'submit', false); ?></td>
+				</td>
 				</tbody>
 
 				</table>

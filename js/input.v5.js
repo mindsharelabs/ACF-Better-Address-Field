@@ -77,11 +77,11 @@
 
 			// vars
 			var args = {
-        		zoom		: parseInt(this.o.zoom),
+        		zoom		: (!isNaN(parseInt(this.o.zoom)) ? parseInt(this.o.zoom) : 14),
         		center		: new google.maps.LatLng(this.o.lat, this.o.lng),
         		mapTypeId	: google.maps.MapTypeId.ROADMAP
         	};
-
+					console.log(args.zoom);
 			// create map
         	this.map = new google.maps.Map( this.$el.find('.canvas')[0], args);
 
@@ -107,7 +107,8 @@
 		    // value exists?
 		    var lat = this.$el.find('.latitude').val(),
 		    	lng = this.$el.find('.longitude').val();
-
+					console.log(lat);
+					console.log(lng);
 		    if( lat && lng )
 		    {
 			    this.update( lat, lng ).center();
